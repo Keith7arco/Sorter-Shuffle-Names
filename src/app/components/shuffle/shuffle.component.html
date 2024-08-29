@@ -1,0 +1,52 @@
+<div class="max-w-screen-lg mx-auto px-2 md:px-4">
+  <div class="flex justify-between mb-2">
+    <button
+      class="inline-block px-3 py-1 text-white bg-gray-500 rounded-lg hover:bg-gray-400 duration-150"
+      (click)="reloadTable()">
+      <svg class="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="flex">
+    <!-- Tabla principal -->
+    <div class="flex-grow">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-orange-400">
+          <tr>
+            <th *ngFor="let header of headers" class="px-4 py-2 text-center text-xs font-medium text-gray-900 uppercase tracking-wider">
+              {{ header }}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let row of getTableData(); let i = index">
+            <td class="px-4 py-2 whitespace-nowrap text-xs text-center text-gray-500">
+              <div *ngFor="let item of row.col1">{{ item }}</div>
+            </td>
+            <td class="px-4 py-2 whitespace-nowrap text-xs text-center text-gray-500">
+              <div *ngFor="let item of row.col2">{{ item }}</div>
+            </td>
+            <td class="px-4 py-2 whitespace-nowrap text-xs text-center text-gray-500">
+              <div *ngFor="let item of row.col3">{{ item }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Nombres y recuentos -->
+    <div class="w-1/3 ml-6 p-4 bg-orange-100 rounded-lg shadow-md">
+      <h4 class="text-xs font-medium text-gray-800 mb-2">N Nombres</h4>
+      <table class="min-w-full text-xs">
+        <tbody>
+          <tr *ngFor="let key of objectKeys(nameCounts)">
+            <td class="py-0.5 px-1 text-gray-600">{{ key }}</td>
+            <td class="py-0.5 px-1 text-gray-800">{{ nameCounts[key] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

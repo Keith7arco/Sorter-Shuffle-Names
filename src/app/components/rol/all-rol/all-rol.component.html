@@ -1,0 +1,93 @@
+<div class="max-w-screen-xl mx-auto px-4 md:px-8">
+  <div class="items-start justify-between md:flex">
+    <div class="max-w-lg">
+      <h3 class="text-gray-800 text-xl font-bold sm:text-2xl">
+        Roles
+      </h3>
+      <p class="text-gray-600 mt-2">
+        Lista de roles con los grados logicos para el orden.
+      </p>
+    </div>
+    <button
+      class="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-500 rounded-lg hover:bg-indigo-400 active:bg-indigo-600 md:text-sm"
+      (click)="openModal()">
+      Add Rol
+    </button>
+  </div>
+  <div class="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+    <table class="w-full table-auto text-sm text-left">
+      <thead class="bg-gray-50 text-gray-600 font-medium border-b">
+        <tr>
+          <th class="py-3 px-6">Name</th>
+          <th class="py-3 px-6 text-center">Grade</th>
+          <th class="py-3 px-6 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-600 divide-y">
+        <tr *ngFor="let rol of roles">
+          <td class="px-6 py-4 whitespace-nowrap">{{rol.name}}</td>
+          <td class="px-6 py-4 text-center whitespace-nowrap">{{rol.grade}}</td>
+          <td class="px-6 py-4 text-center whitespace-nowrap">
+            <a
+              href="javascript:void()"
+              (click)="editRol(rol)"
+              class="inline-block py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
+              >Edit</a
+            >
+            <button
+              (click)="deleteRol(rol._id)"
+              class="inline-block py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg w-96 transform transition-transform duration-300 ease-out scale-95" [class.scale-100]="isModalOpen">
+    <div class="border-b px-4 py-2 flex justify-between items-center">
+      <h3 class="text-lg font-semibold">{{ modalTitle }}</h3>
+      <button (click)="closeModal()" class="text-gray-600 hover:text-gray-800">&times;</button>
+    </div>
+    <div class="p-4">
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="rol.name"
+          class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+      </div>
+      <div class="mb-4">
+        <label for="grade" class="block text-gray-700 font-medium mb-2">Grade</label>
+        <select
+          id="grade"
+          [(ngModel)]="rol.grade"
+          name="grade"
+          (change)="onGradeChange($event)"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex justify-end p-4 border-t">
+      <button (click)="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-400">Cancel</button>
+      <button (click)="onSave()" class="ml-2 px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-400">Save</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
